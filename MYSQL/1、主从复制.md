@@ -29,8 +29,6 @@
 - MYSQL原理 
 - MYSQL优化 
 
-## Redis
-
 ## 计算机网络
 - 七大性能指标
 - ABC类IP地址
