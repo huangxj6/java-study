@@ -33,6 +33,8 @@
 
 ## Zokkeeper
 
+## Nginx
+
 ## Spring
 
 ## Spring Mvc
@@ -44,6 +46,7 @@
 ## Redis
 
 ## Netty
+- NIO
 
 ## Dubbo
 
@@ -71,15 +74,18 @@
 - 类文件结构   
 - 类加载机制 
 
-
 ## JAVA并发编程
 - java内存模型
+- 线程池
+- synchronized原理与使用
+- ThreadLocal
+- ReentrantLock
+- ReentrantReadWriteLock
+- ConcurrentHashMap
 
 ## JDK源码
 - HashMap
 - ArrayList
-
-## NIO
 
 ## 计算机网络
 - 七大性能指标
@@ -89,6 +95,8 @@
 - TCP/IP协议
 
 ## Linux
+- vi
+- shell编程
 
 ## 数据结构与算法
 - 动态规划
