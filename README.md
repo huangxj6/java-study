@@ -31,7 +31,7 @@
 - MySQL优化 
 
 ## PostgreSQL
-- 安装
+- [安装及配置](PostgreSQL/安装及配置.md)
 
 ## Zokkeeper
 - 安装
