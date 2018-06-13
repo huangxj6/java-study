@@ -24,16 +24,20 @@
 - 23、解释器模式
 
 ## MySQL
+- 安装
 - MySQL基础
 - MySQL高可用
 - MySQL原理 
 - MySQL优化 
 
 ## PostgreSQL
+- 安装
 
 ## Zokkeeper
+- 安装
 
 ## Nginx
+- 安装
 
 ## Spring
 
@@ -44,6 +48,7 @@
 ## Mybatis
 
 ## Redis
+- 安装
 
 ## Netty
 - NIO
@@ -75,6 +80,7 @@
 - 类加载机制 
 
 ## JAVA并发编程
+- 死锁
 - java内存模型
 - 线程池
 - synchronized原理与使用
@@ -96,11 +102,13 @@
 
 ## Linux
 - vi
+- 用户组
 - shell编程
 
 ## 数据结构与算法
 - 动态规划
 - 贪心算法
+- 一致性哈希算法
 - 回溯法
 - 红黑树
 - BTree
