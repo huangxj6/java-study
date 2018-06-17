@@ -25,6 +25,7 @@
 
 ## MySQL
 - [安装及配置](MySQL/安装及配置.md)
+
 - MySQL基础
 	- [mysql基础操作](MySQL/MySQL基础/mysql基础操作.md)
 - MySQL高可用
