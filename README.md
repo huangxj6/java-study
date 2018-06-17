@@ -30,6 +30,7 @@
 - MySQL高可用
 - MySQL原理
 - MySQL优化
+	- [字段数据类型的选择](MySQL/MySQL优化/字段数据类型的选择.md)
 
 ## PostgreSQL
 - [安装及配置](PostgreSQL/安装及配置.md)
