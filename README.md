@@ -24,7 +24,7 @@
 - 23、解释器模式
 
 ## MySQL
-- 安装
+- [安装](MySQL/安装及配置.md)
 - MySQL基础
 - MySQL高可用
 - MySQL原理 
