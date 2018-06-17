@@ -32,7 +32,7 @@
     - 例子
     
         ```
-        CREATE DATABASE mytest DEFAULT CHARACTER utf8;
+        CREATE DATABASE mytest DEFAULT CHARACTER SET utf8;
         ```
 
 - 修改数据库

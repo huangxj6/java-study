@@ -24,12 +24,12 @@
 - 23、解释器模式
 
 ## MySQL
-- [安装](MySQL/安装及配置.md)
+- [安装及配置](MySQL/安装及配置.md)
 - MySQL基础
 	- [mysql基础操作](MySQL/MySQL基础/mysql基础操作.md)
 - MySQL高可用
-- MySQL原理 
-- MySQL优化 
+- MySQL原理
+- MySQL优化
 
 ## PostgreSQL
 - [安装及配置](PostgreSQL/安装及配置.md)
@@ -76,9 +76,9 @@
     + jinfo
     + jmap
     + jhat
-    + jstack 
-- 类文件结构   
-- 类加载机制 
+    + jstack
+- 类文件结构
+- 类加载机制
 
 ## JAVA并发编程
 - [死锁](JAVA并发编程/死锁.md)
