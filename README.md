@@ -53,6 +53,9 @@
 ## Redis
 - 安装
 
+## RabbitMQ
+- 安装
+
 ## Netty
 - NIO
 
