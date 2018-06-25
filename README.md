@@ -25,6 +25,8 @@
 	- 22、中介模式
 	- 23、解释器模式
 
+- [面向对象设计](软件架构与设计/面向对象设计.md)
+
 ## 数据库基础数据库基础
 - 关系数据库
 	- 关系操作
@@ -39,8 +41,12 @@
 
 - [MySQL基础](MySQL/MySQL基础/)
 	- [mysql基础操作](MySQL/MySQL基础/mysql基础操作.md)
+
 - MySQL高可用
-- MySQL原理
+
+- [MySQL原理](MySQL/MySQL原理)
+	- [MySQL体系结构](MySQL/MySQL原理/MySQL体系结构.md)
+
 - MySQL优化
 	- [字段数据类型的选择](MySQL/MySQL优化/字段数据类型的选择.md)
 
