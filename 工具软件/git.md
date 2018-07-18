@@ -8,7 +8,7 @@
 
 - 1、SVN是集中式存储，而GIT是分布式存储，如下：
 
-  ![image](/image/13.png)
+  ![image](/image/GIT-1-1.png)
 
   - 1）SVN是集中存储，所有的版本数据均集中存储在服务器中，如果服务器坏了，那么所有的版本记录都将丢失。
 
@@ -18,7 +18,7 @@
 
 - 2、两者版本数据库中存储文件的方式不同，如下：
 
-  ![image](/image/12.png)
+  ![image](/image/GIT-1-2.png)
 
   - 1）SVN在每次提交后，存储的是该文件针对上一次提交时的变化（差异），若文件没变化的话则不存储。
 
@@ -32,11 +32,11 @@
 
 - 在GIT中，文件有四种状态：`Untracked、Unmodified、Modified、Staged`，及三大区域`working directory、stage area、.git directory`，具体交互如下图所示：
 
-  ![image](/image/6.png)
+  ![image](/image/GIT-1-3.png)
 
 - 下图展示了一个文件从创建到修改时该文件的演变过程
 
-  ![image](/image/11.png)
+  ![image](/image/GIT-1-4.png)
 
 
 #### 4、git命令详解
@@ -45,19 +45,19 @@
 
   - 首先我们使用`git log`命令可以查到当前仓库中的历史提交记录，当前的head版本id为`fccdd7c5245e237ce2a685000092e40c0ab9236e`
 
-    ![image](/image/7.png)
+    ![image](/image/GIT-1-5.png)
 
   - 我们想要将记录回滚到“新建 README.md”处，此时可以使用`git reset`命令如下，此时再执行`git log`的时候可以看出记录已经回滚到了`f07d295b2afa8306407a53a6a7554d5fafebb9b7`（注：如果没加`--hard`的话，那么基于f07d之前的修改都会返回到工作区中，相当于是撤销提交的历史，加了`--hard`就相当于是直接回滚了）
 
-    ![image](/image/8.png)
+    ![image](/image/GIT-1-6.png)
 
   - 如果我们想要将这个操作同步到远端的话，很明显是有问题的，因为远端的仓库与本地的不同步
 
-    ![image](/image/9.png)
+    ![image](/image/GIT-1-7.png)
 
   - 我们可以使用`git push -f origin master`命令强制推送即可成功（**该命令要慎用，有可能会把远端的一些新纪录搞没，虽然之前我们本地的最新记录是fccdd，但远端的不一定是**）
 
-    ![image](/image/10.png)
+    ![image](/image/GIT-1-8.png)
 
 - `checkout`命令
 

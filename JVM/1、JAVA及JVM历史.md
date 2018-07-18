@@ -2,7 +2,7 @@
 
 - 下图展示了JAVA技术体系所包含的内容，以及JDK和JRE所涵盖的范围
 
-  ![image](/image/14.png)
+  ![image](/image/JVM-1-1.png)
 
 #### 2、JAVA的发展史
 
