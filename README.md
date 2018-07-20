@@ -83,6 +83,8 @@
 
 ## JVM
 
+- 参考自周志明版《深入理解JAVA虚拟机》
+
 - [1、JAVA及JVM历史](JVM/1、JAVA及JVM历史.md)
 
 - [2、JAVA的内存结构](JVM/2、JAVA的内存结构.md)
