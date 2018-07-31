@@ -186,9 +186,9 @@
 
   		Thread.sleep(100);
 
-  		System.out.println(t.isInterrupted());
+  		System.out.println(t.isInterrupted()); // false
   		t.interrupt();
-  		System.out.println(t.isInterrupted());
+  		System.out.println(t.isInterrupted()); // true
   	}
     ```
 
@@ -210,9 +210,9 @@
 
   		Thread.sleep(100);
 
-  		System.out.println(t.isInterrupted());
+  		System.out.println(t.isInterrupted()); // false
   		t.interrupt();
-  		System.out.println(t.isInterrupted());
+  		System.out.println(t.isInterrupted()); // false
   	}
     ```
 - **过期的suspent()、resume()、stop()**
@@ -261,5 +261,139 @@
 
 #### 3、线程通信
 
+- **synchronized原理**
 
-#### 4、线程应用实例
+  - synchronized关键字可以修饰方法或者以同步代码块的形式来使用，它主要确保多个线程在同一时刻，只能有一个线程处于方法或者同步块中，**它保证了线程对变量访问的可见性和排他性，保证了代码块的原子性**。
+
+  - 我们可以通过如下代码来验证synchronized关键字底层的实现原理
+
+    ```java
+    public class Test {
+
+      public static void main(String[] args) {
+
+        // synchronized代码块
+        synchronized (Test.class) {
+        	fun();
+        }
+      }
+
+      // synchronized修饰方法
+      public static synchronized void fun() {
+
+      }
+    }
+
+    ```
+
+  - 通过执行`javap -v Test.class`命令的方式查看改类被编译过后的字节码指令如下：
+
+    ```
+    public static void main(java.lang.String[]);
+    descriptor: ([Ljava/lang/String;)V
+    flags: ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=2, locals=2, args_size=1
+    	 0: ldc           #1                  // class com/test/Test
+    	 2: dup
+    	 3: astore_1
+    	 4: monitorenter
+    	 5: invokestatic  #16                 // Method fun:()V
+    	 8: aload_1
+    	 9: monitorexit
+    	10: goto          16
+    	13: aload_1
+    	14: monitorexit
+    	15: athrow
+    	16: return
+
+    public static synchronized void fun();
+    descriptor: ()V
+    flags: ACC_PUBLIC, ACC_STATIC, ACC_SYNCHRONIZED
+    Code:
+      stack=0, locals=0, args_size=0
+    	 0: return
+    ```
+
+  - 在上述类信息描述中，我们可以看到，synchronized对于同步代码块和同步方法的实现方式不同。
+
+    - 对于同步代码块的实现使用了monitorenter（获取锁）和monitorexit（释放锁）指令，其中monitorexit指令在第4行及第14行都出现了，第4行代表正常的锁释放，而第14行则代表抛异常时的锁释放。
+
+    - 对于同步方法的实现则是依靠方法修饰上的ACC_SYNCHRONIZED来完成的。
+
+    - 无论采用哪种方式，本质都是对一个对象的监视器（monitor）进行获取，而这个获取的过程是排他的，也就是同一时刻只能有一个线程获取到由synchronized所保护对象的监视器。
+
+  - 任何一个对象都拥有自己的监视器，当这个对象由同步块或者这个对象的同步方法调用时，执行方法的线程必须先获取到对象的监视器才能进入同步块或同步方法，而没有获取到监视器的线程将会被阻塞在同步块和同步方法的入口处，进入BLOCKED状态；当访问Object的前驱释放了锁，则该释放操作将唤醒阻塞在同步队列中的线程，使其重新尝试对监视器的获取。
+
+    ![image](/image/THREAD-3-3.jpg)
+
+- **等待、通知机制**
+
+  - 等待通知机制的原理如下图所示：
+
+    ![image](/image/THREAD-3-4.png)
+
+  - 图中线程1首先获取了对象的锁，然后调用了对象的wait方法，从而放弃了锁并进入了对象的等待队列（WaitQueue）中进入WAITING状态。由于线程1释放了对象的锁（Monitor.Exit）,线程2随后便获取了对象的锁，并调用对象的notify方法将线程1从等待队列中移到同步队列（SynchronizedQueue）中去，此时线程1的状态由WAITING变为了BLOCKED状态。线程2释放锁之后，线程1再次获取锁并从wait()方法返回继续执行。
+
+  - 等待、通知机制的经典范式
+
+    - 等待方伪代码如下：
+
+      ```java
+      synchronized (对象) {
+
+        while(条件不足) {
+          对象.wait();
+        }
+
+        对应的处理逻辑
+      }
+      ```
+
+    - 通知方伪代码如下：
+
+      ```java
+      synchronized (对象) {
+
+        改变条件
+        对象.notifyAll();
+      }
+      ```
+
+- **Thread.join()的使用**
+
+  - 在多线程的运行环境中，线程类的join方法可以起到控制不同线程间的执行顺序的作用。
+
+  - 在主线程中执行了线程1的join方法，那么主线程就会释放执行权和执行资格，让线程1先执行，等待线程1执行完毕后，主线程才会重新得到执行资格。
+
+    ```java
+    public class Test {
+
+    	public static void main(String[] args) throws InterruptedException {
+
+    		Thread t1 = new Thread();
+    		t1.start();
+
+    		// 执行了这一句之后，主线程会释放执行权和执行资格，等待t1线程执行完毕之后才重新获得执行资格
+    		t1.join();
+    	}
+    }
+    ```
+  - join的实现原理也是利用了等待通知机制，我们可以看到join的代码实现如下，当线程1还是处于激活状态时，则让调用方进入等待状态：
+
+    ```java
+    // 加锁当前的线程对象
+    public final synchronized void join(long millis) throws InterruptedException {
+
+      // 条件不满足，继续等待
+      while (isAlive()) {
+          wait(0);
+      }
+
+      // 条件符合，方法返回
+    }
+    ```
+
+  - 当线程1终止时，会调用线程自身的notifyAll()方法，唤醒所有等待在该线程对象上的线程。
+
+  
